@@ -15,8 +15,7 @@ defineElectrodeSet.fnc(which.cap = "biosemi.32", bottom.eye = "BE")
     Adds the specified EOG channel to the vector of EEG channels. Defaults to "BE", i.e., bottom eye EOG. Can be set to any other EOG channel (e.g., "TE", "LC", "RC", etc.). Can also be "NA", in which case, no EOG channel is added to the EEG channel vector.
 }
 }
-\details{
-}
+
 \value{
   \item{electrodes}{A vector of EEG channel names.}
   \item{xticks}{A vector of comprised of "s" or "n" indicating, for each channel in the electrodes vector, the x-axis should be drawn.}
@@ -28,7 +27,7 @@ defineElectrodeSet.fnc(which.cap = "biosemi.32", bottom.eye = "BE")
   \item{cap.name}{The name of the cap setup used.}
 }
 \author{
-  R. Harald Baayen <baayen@ualberta.ca>, Peter Hendrix <hendrix@ualberta.ca>, and Antoine Tremblay <trea26@gmail.com>.
+  R. Harald Baayen, University of Alberta, <baayen@ualberta.ca>; Peter Hendrix, university of Alberta, <hendrix@ualberta.ca>; and Antoine Tremblay, IWK Health Center, <trea26@gmail.com>.
 }
 \seealso{
 \code{\link{eeg}}
@@ -37,7 +36,7 @@ defineElectrodeSet.fnc(which.cap = "biosemi.32", bottom.eye = "BE")
 \code{\link{icaDEN.fnc}}
 }
 \examples{
-defineElectrodeSet.fnc(which.cap="biosemi.32",bottom.eye=NA)
+defineElectrodeSet.fnc(which.cap = "biosemi.32", bottom.eye = NA)
 }
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }

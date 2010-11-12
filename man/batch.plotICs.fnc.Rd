@@ -31,7 +31,8 @@ batch.plotICs.fnc(epoch.length = NA, cor.only = FALSE, method = "by.trial", fn =
   \item{verbose}{Whether you want to see a verbal indication of where in the process you are.}
 }
 \value{A pdf file containing the IC plots for each subject as well as a separate pdf file for the EOGs.}
-\author{Antoine Tremblay <trea26@gmail.com>}
+\author{
+Antoine Tremblay, IWK Health Center, <trea26@gmail.com>}
 \seealso{
 \code{\link{defineElectrodeSet.fnc}}
 \code{\link{eeg}}

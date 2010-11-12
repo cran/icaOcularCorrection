@@ -24,7 +24,11 @@ plotICs.fnc(ica.object, epoch.length = NA, cor.only = FALSE, whichEOG = c("VEOG"
   \item{pdf.prefix}{A prefix to add in front of the name of the corrected file. Defaults to "ICs_".}
 }
 \value{Plots and pdf files.}
-\author{Antoine Tremblay <trea26@gmail.com>}
+
+\author{
+Antoine Tremblay, IWK Health Center, <trea26@gmail.com>
+}
+
 \seealso{
 \code{\link{defineElectrodeSet.fnc}}
 \code{\link{eeg}}
