@@ -10,8 +10,8 @@ Removes eye-movements artifacts as well as (a portion of) of other noise using t
 \tabular{ll}{
 Package: \tab icaOcularCorrection\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2010-11-12\cr
+Version: \tab 1.2\cr
+Date: \tab 2010-11-13\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
@@ -43,10 +43,26 @@ Flexer, A., Bauer, H., Pripfl, J. & Dorffner, G. (2005). Using ICA for removal o
 data(eeg)
 head(eeg)
 # Create icaOcularCorrection object
-den = icaDEN.fnc(eeg, epoch.length = 192, method = "all", electrodes = c("Fp1", "Fp2", "AF3", "AF4", "F7", "F3", "Fz", "F4", "F8", "FC5", "FC1", "FC2", "FC6", "T7", "C3", "Cz", "C4", "T8", "CP5", "CP1", "CP2", "CP6", "P7", "P3", "Pz", "P4", "P8", "PO3", "PO4", "O1", "Oz", "O2"), eogs = list(VEOG = c("BE", "TE"), HEOG = c("LC", "RC")), threshold = 0.4, n.comp = NA, ret.SAWK = TRUE, plot.it = FALSE, fn.pdf = "default", verbose = TRUE)
+den = icaDEN.fnc(eeg, epoch.length = 192, 
+    method = "all", electrodes = c("Fp1", 
+    "Fp2", "AF3", "AF4", "F7", "F3", "Fz", 
+    "F4", "F8", "FC5", "FC1", "FC2", "FC6", 
+    "T7", "C3", "Cz", "C4", "T8", "CP5", 
+    "CP1", "CP2", "CP6", "P7", "P3", "Pz", 
+    "P4", "P8", "PO3", "PO4", "O1", "Oz", 
+    "O2"), eogs = list(VEOG = c("BE", "TE"), 
+    HEOG = c("LC", "RC")), threshold = 0.4, 
+    n.comp = NA, ret.SAWK = TRUE, plot.it = 
+    FALSE, fn.pdf = "default", verbose = TRUE)
 names(den)
 den$snr.ica
 
 # Plot ICs
-plotICs.fnc(den, epoch.length = 192, cor.only = FALSE, whichEOG = c("VEOG", "HEOG"), method = "all", dir.create.path = paste(getwd(), "/figs/", sep = ""), dir.create.name = "IC.plots", threshold = NA, nplots = c(2, 2), ask = TRUE, plot.EOG = TRUE, pdf.it = FALSE, pdf.prefix = "ICs_")
+plotICs.fnc(den, epoch.length = 192, cor.only = 
+    FALSE, whichEOG = c("VEOG", "HEOG"), 
+    method = "all", dir.create.path = paste(getwd(), 
+    "/figs/", sep = ""), dir.create.name = "IC.plots", 
+    threshold = NA, nplots = c(2, 2), ask = TRUE, 
+    plot.EOG = TRUE, pdf.it = FALSE, pdf.prefix = 
+    "ICs_")
 }

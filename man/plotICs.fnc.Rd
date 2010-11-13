@@ -5,7 +5,14 @@
 Function to plot the ICA-corrected EEG against uncorrected EEG. Also plots the EOGs in a different X11 window.
 }
 \usage{
-plotICs.fnc(ica.object, epoch.length = NA, cor.only = FALSE, whichEOG = c("VEOG", "HEOG"), method = "by.trial", dir.create.path = paste(getwd(), "/figs/", sep = ""), dir.create.name = "IC.plots", recursive = TRUE, threshold = NA, nplots = c(2, 2), ask = TRUE, plot.EOG = TRUE, pdf.it = FALSE, pdf.prefix = "ICs_")
+plotICs.fnc(ica.object, epoch.length = NA, 
+    cor.only = FALSE, whichEOG = c("VEOG", 
+    "HEOG"), method = "by.trial", dir.create.path = 
+    paste(getwd(), "/figs/", sep = ""), 
+    dir.create.name = "IC.plots", recursive = 
+    TRUE, threshold = NA, nplots = c(2, 2), 
+    ask = TRUE, plot.EOG = TRUE, pdf.it = FALSE, 
+    pdf.prefix = "ICs_")
 }
 \arguments{
   \item{ica.object}{An icaDEN.fnc denoised object.}
@@ -40,7 +47,13 @@ Antoine Tremblay, IWK Health Center, <trea26@gmail.com>
 \examples{
 data(den)
 # plot ICs
-plotICs.fnc(den, epoch.length = 192, cor.only = FALSE, whichEOG = c("VEOG", "HEOG"), method = "by.trial", dir.create.path = paste(getwd(), "/figs/", sep = ""), dir.create.name = "IC.plots", threshold = 0.4, nplots = c(2, 2), ask = TRUE, plot.EOG = TRUE, pdf.it = FALSE, pdf.prefix = "ICs_")
+plotICs.fnc(den, epoch.length = 192, cor.only = 
+    FALSE, whichEOG = c("VEOG", "HEOG"), 
+    method = "by.trial", dir.create.path = 
+    paste(getwd(), "/figs/", sep = ""), 
+    dir.create.name = "IC.plots", threshold = 
+    0.4, nplots = c(2, 2), ask = TRUE, plot.EOG = 
+    TRUE, pdf.it = FALSE, pdf.prefix = "ICs_")
 }
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }

@@ -5,7 +5,8 @@
     Description: Generates a vector of channel names of a specific kind of cap ("Biosemi", "Easy Cap") as well as information for plotting namely, panel skips, x and y ticks, x and y coordinates, and a plotting matrix.
 }
 \usage{
-defineElectrodeSet.fnc(which.cap = "biosemi.32", bottom.eye = "BE")
+defineElectrodeSet.fnc(which.cap = "biosemi.32", 
+     bottom.eye = "BE")
 }
 \arguments{
   \item{which.cap}{
@@ -36,7 +37,8 @@ defineElectrodeSet.fnc(which.cap = "biosemi.32", bottom.eye = "BE")
 \code{\link{icaDEN.fnc}}
 }
 \examples{
-defineElectrodeSet.fnc(which.cap = "biosemi.32", bottom.eye = NA)
+defineElectrodeSet.fnc(which.cap = "biosemi.32", 
+     bottom.eye = NA)
 }
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }

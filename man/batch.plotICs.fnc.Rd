@@ -3,7 +3,16 @@
 \title{Batch processing for plotICs.fnc.}
 \description{Batch processing for plotICs.fnc.}
 \usage{
-batch.plotICs.fnc(epoch.length = NA, cor.only = FALSE, method = "by.trial", fn = NA, fn.path = paste(getwd(), "/dataEEG/ICA.denoised/", sep = ""), fn.pattern = "^ICA_.*\\\.rda", fn.full.names = TRUE, fn.object.name = "ica", whichEOG = c("VEOG", "HEOG"), threshold = NA, nplots = c(2, 2), ask = FALSE, plot.EOG = TRUE, pdf.it = TRUE, pdf.prefix = "ICs_", begin = 1, finish = NA, dir.create.path = paste(getwd(), "/figs/", sep = ""), dir.create.name = "IC.plots", other.things.to.do = NULL, recursive = TRUE, verbose = FALSE)
+batch.plotICs.fnc(epoch.length = NA, cor.only = FALSE, 
+    method = "by.trial", fn = NA, fn.path = paste(getwd(), 
+    "/dataEEG/ICA.denoised/", sep = ""), fn.pattern = 
+    "^ICA_.*\\\.rda", fn.full.names = TRUE, fn.object.name = 
+    "ica", whichEOG = c("VEOG", "HEOG"), threshold = NA, 
+    nplots = c(2, 2), ask = FALSE, plot.EOG = TRUE, pdf.it = 
+    TRUE, pdf.prefix = "ICs_", begin = 1, finish = NA, 
+    dir.create.path = paste(getwd(), "/figs/", sep = ""), 
+    dir.create.name = "IC.plots", other.things.to.do = NULL, 
+    recursive = TRUE, verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,7 +35,7 @@ batch.plotICs.fnc(epoch.length = NA, cor.only = FALSE, method = "by.trial", fn =
   \item{finish}{Within the file name vector, finish correction process as which point. Default is to finish with the last item in the file name vector.}
   \item{dir.create.path}{The path where a directory will be created, in which the corrected files will be placed. Defaults to "paste(getwd(), "/figs/", sep = "")".}
   \item{dir.create.name}{The name of the directory where the corrected files will be placed. Defaults to "IC.plots".}
-  \item{other.things.to.do}{You can tell the function in the form of a vector (c(...)) to performing other things before correction. For instance: c('eeg$Recalled=as.factor(eeg$Recalled)','eeg$LogitABCD=as.numeric(eeg$LogitABCD)').}
+  \item{other.things.to.do}{You can tell the function in the form of a vector (c(...)) to performing other things before correction. For instance: c('eeg$Recalled = as.factor(eeg$Recalled)', 'eeg$LogitABCD = as.numeric(eeg$LogitABCD)').}
   \item{recursive}{Logical. Should elements of the path other than the last be created?  If TRUE, like Unix's 'mkdir -p'. Value passed to "recursive" argument of "dir.create".}
   \item{verbose}{Whether you want to see a verbal indication of where in the process you are.}
 }
