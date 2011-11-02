@@ -1,0 +1,14 @@
+--------------------
+version 1.3
+-----
+* Changed default of ``n.comp'' argument in functions
+``icaDEN.fnc'' and ``batch.icaDEN.fnc'' from ``NA'' to
+16.
+* Added function ``mc.batch.icaDEN.fnc''
+* Removed plotting arguments from function ``icaDEN.fnc''.
+* In functions ``batch.icaDEN.fnc'' and ``mc.batch.icaDEN.fnc''
+changed plotting arguments to ``pdf.it'', ``pdf.prefix'', and
+``pdf.compress''.
+* Added argument ``pdf.compress'' to function ``plotICs.fnc''.
+* For next version: 
+	-- Add an automatic number of components estimator as in FSL

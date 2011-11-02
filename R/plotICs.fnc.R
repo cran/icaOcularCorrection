@@ -1,11 +1,11 @@
 plotICs.fnc <-
 function(
                         ica.object,
-                        epoch.length=NA,
+                        epoch.length=NULL,
                         cor.only=FALSE,
                         whichEOG=c("VEOG","HEOG"),
                         method="by.trial", # or "all")
-                        dir.create.path=paste(getwd(),"/figs/",sep=""),
+                        dir.create.path=file.path(getwd(),"figs"),
                         dir.create.name="IC.plots",
                         recursive=TRUE,
                         threshold=NA,
@@ -13,23 +13,27 @@ function(
                         ask=TRUE,
                         plot.EOG=TRUE,
                         pdf.it=FALSE,
-                        pdf.prefix="ICs_"                      
+                        pdf.prefix="ICs_",
+                        pdf.compress=FALSE
                       ){
   if(pdf.it){    # if pdf-ing the plots
-    dir.create(paste(dir.create.path,dir.create.name,sep="/"),showWarnings=FALSE,recursive=recursive)
-    pdf(file=paste(dir.create.path,dir.create.name,"/EOGs_Subject ",unique(ica.object$eeg$Subject),".pdf",sep=""))
+    dir.create(file.path(dir.create.path,dir.create.name),showWarnings=FALSE,recursive=recursive)
+    pdf(file=file.path(dir.create.path,dir.create.name,paste("EOGs_Subject",unique(ica.object$eeg$Subject),".pdf",sep="")))
     ask=FALSE
     if(plot.EOG){   # set par(mfrow) for the EOG plot depending on the number of EOGs
       if(length(whichEOG)==1){
-        par(mfrow=c(1,1))
+        #par(mfrow=c(1,1))
+        par(mfrow=c(2,2))
         plot(ica.object$eeg[,whichEOG],type="l",main=eog)    
       } else if (length(whichEOG)==2){
-        par(mfrow=c(1,2))
+        #par(mfrow=c(1,2))
+        par(mfrow=c(2,2))
         for(eog in whichEOG){
           plot(ica.object$eeg[,eog],type="l",main=eog)    
         }
       } else if (length(whichEOG)==3){
-        par(mfrow=c(1,3))
+        par(mfrow=c(2,2))
+        #par(mfrow=c(1,3))
         for(eog in whichEOG){
           plot(ica.object$eeg[,eog],type="l",main=eog)    
         }
@@ -41,18 +45,30 @@ function(
       }
     }
     dev.off()
+    if(pdf.compress){
+        system(paste("pdftk ",file.path(dir.create.path,dir.create.name,paste("EOGs_Subject",
+                        unique(ica.object$eeg$Subject),".pdf",sep=""))," output ",file.path(dir.create.path,
+                        dir.create.name,paste("EOGs_Subject",unique(ica.object$eeg$Subject),"_comp.pdf",sep="")),
+                        " compress", sep=""))
+        system(paste("rm ",file.path(dir.create.path,dir.create.name,paste("EOGs_Subject",
+                        unique(ica.object$eeg$Subject),".pdf",sep="")),sep=""))
+
+    }
   } else { # if not pdf-ing the plots
     if(plot.EOG){ # if plotting the EOGs
       if(length(whichEOG)==1){
-        par(mfrow=c(1,1))
+        par(mfrow=c(2,2))
+        #par(mfrow=c(1,1))
         plot(ica.object$eeg[,whichEOG],type="l",main=eog)    
       } else if (length(whichEOG)==2){
-        par(mfrow=c(1,2))
+        par(mfrow=c(2,2))
+        #par(mfrow=c(1,2))
         for(eog in whichEOG){
           plot(ica.object$eeg[,eog],type="l",main=eog)    
         }
       } else if (length(whichEOG)==3){
-        par(mfrow=c(1,3))
+        par(mfrow=c(2,2))
+        #par(mfrow=c(1,3))
         for(eog in whichEOG){
           plot(ica.object$eeg[,eog],type="l",main=eog)    
         }
@@ -66,8 +82,8 @@ function(
     }
   }
 
-  if(!pdf.it){ # set par(ask) to 'ask' if not pdf-ing the plots
-    par(ask=ask)
+  if(!pdf.it){ # set devAskNewPage(ask) to 'ask' if not pdf-ing the plots
+    devAskNewPage(ask=ask)
   }
 
   S=ica.object$S # save the source matrix, S, from the ica.object in variable 'S'
@@ -77,7 +93,7 @@ function(
   }
 
   if(pdf.it){ # if pdf-ing the plots, open pdf device
-    pdf(file=paste(dir.create.path,dir.create.name,"/",pdf.prefix,"Subject ",unique(ica.object$eeg$Subject),".pdf",sep=""))
+    pdf(file=file.path(dir.create.path,dir.create.name,paste(pdf.prefix,"Subject",unique(ica.object$eeg$Subject),".pdf",sep="")))
     ask=FALSE
     par(mfrow=nplots)      
   } else {
@@ -118,9 +134,21 @@ function(
 
   if(pdf.it){ # if pdf-ing plots, close device
     dev.off()
+
+    if(pdf.compress){
+        system(paste("pdftk ",file.path(dir.create.path,dir.create.name,
+                    paste(pdf.prefix,"Subject",unique(ica.object$eeg$Subject),
+                        ".pdf",sep=""))," output ",file.path(dir.create.path,
+                        dir.create.name,paste(pdf.prefix,"Subject",
+                        unique(ica.object$eeg$Subject),"_comp.pdf",sep="")),
+                        " compress",sep=""))
+        system(paste("rm ",file.path(dir.create.path, dir.create.name,
+                    paste(pdf.prefix,"Subject", unique(ica.object$eeg$Subject),".pdf",sep="")),
+                    sep=""))
+    }
   } else { # if not pdf-ing, reset par(mfrow) to c(1,1) and ask to FALSE
     par(mfrow=c(1,1))
-    par(ask=FALSE)
+    devAskNewPage(ask=FALSE)
   }
 
 }

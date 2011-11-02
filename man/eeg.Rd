@@ -1,13 +1,16 @@
 \name{eeg}
 \alias{eeg}
+\concept{EEG}
+\concept{electro-encephalogram}
+\concept{electroencephalogram}
+\concept{ERP}
+\concept{event-related potentials}
+\concept{event related potentials}
 \docType{data}
 \title{Data frame from subject 21.}
-\description{
-Recorded from subject 21 during chunk recall experiment with Biosemi Mk II system, 32 electrodes + 4 EOGs + 2 mastoids. Original sampling rate: 8000 Hz. Downsampled to 128 Hz. Referenced on-line to mastoids. Filtered off-line 0.01 to 30 Hz with Butterworth filter in Analyzer v. 1.05. Epoch length is 192. There are 10 4-word sequences of the original 432 (thus 10 items * 192 samples per item = 1920 data points).
-}
+\description{Recorded from subject 21 during chunk recall experiment with Biosemi Mk II system, 32 electrodes + 4 EOGs + 2 mastoids. Original sampling rate: 8000 Hz. Downsampled to 128 Hz. Referenced on-line to mastoids. Filtered off-line 0.01 to 30 Hz with Butterworth filter in Analyzer v. 1.05. Epoch length is 192. There are 10 4-word sequences of the original 432 (thus 10 items * 192 samples per item = 1920 data points).}
 \usage{data(eeg)}
-\format{
-  A data frame with 1920 observations on the following 41 variables.
+\format{A data frame with 1920 observations on the following 41 variables.
   \describe{
     \item{\code{Fp1}}{a numeric vector}
     \item{\code{AF3}}{a numeric vector}
