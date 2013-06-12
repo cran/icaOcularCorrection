@@ -1,66 +1,55 @@
 \name{icaOcularCorrection-package}
 \alias{icaOcularCorrection-package}
 \alias{icaOcularCorrection}
+\concept{EEG}
+\concept{electro-encephalogram}
+\concept{electroencephalogram}
+\concept{ERP}
+\concept{event-related potentials}
+\concept{event related potentials}
+\concept{MEG}
+\concept{magneto-encephalogram}
+\concept{magnetoencephalogram}
+\concept{event-related fields}
+\concept{event related fields}
+\concept{event-related magnetic fields}
+\concept{event related magnetic fields}
 \docType{package}
-\title{Package to perform Independent Components Analysis (ICA) based eye-movement correction.}
-\description{Removes eye-movements artifacts as well as (a portion of) of other noise using the fastICA package. The correction methods is based on Flexer, Bauer, Pripfl, and Dorffner (2005). Using the \code{icaDEN.fnc} function, the EEG is first decomposed into indepedent components (ICs), then the correlation between the EOG and each of the ICs is calculated. Any IC with a correlation at or above threshold (default is 0.4) is zeroed out and the EEG is finally reconstructed. The functions \code{batch.icDEN.fnc} and \code{mc.batch.icaDEN.fnc} allow for batch processing.}
+\title{Independent Components Analysis (ICA) based eye-movement correction (HEOG and VEOG) and correction of other known (i.e., recorded; e.g., ECG, GSR, ...) or unknown (i.e., not recorded) sources of noise.}
+\description{Removes eye-movement and other types of known (i.e., recorded) or unknown (i.e., not recorded) artifacts using the fastICA package. The correction method proposed in this package is largely based on the method described in on Flexer, Bauer, Pripfl, and Dorffner (2005). The process of correcting electro- and magneto-encephalographic data (EEG/MEG) begins by running function ``icac'', which first performs independent components analysis (ICA) to decompose the data frame into independent components (ICs) using function ``fastICA'' from the package of the same name. It then calculates for each trial the correlation between each IC and each one of the noise signals -- there can be one or more, e.g., vertical and horizontal electro-oculograms (VEOG and HEOG), electro-myograms (EMG), electro-cardiograms (ECG), galvanic skin responses (GSR), and other noise signals. Subsequently, portions of an IC corresponding to trials at which the correlation between it and a noise signal was at or above threshold (set to 0.4 by default; Flexer et al., 2005, p. 1001) are either zeroed-out in the source matrix, ``S'', or subtracted from the data that was passed to function ``icac''. The user can then identify which ICs correlate with the noise signals the most by looking at the summary of the ``icac'' object (using function ``summary.icac''), the scalp topography of the ICs (using function ``topo.ic''), the time courses of the ICs (using functions (``plot.tric'') and ``plot.nic'', and other diagnostic plots. Once these ICs have been identified, they can be completely zeroed-out or subtracted using function ``update.icac'' and the resulting correction checked using functions ``plot.avgba'' and ``plot.trba''. Some worked-out examples with R code are provided in the following sections. Please contact the package maintainer to obtain the data to run the examples.}
 \details{
 \tabular{ll}{
 Package: \tab icaOcularCorrection\cr
 Type: \tab Package\cr
-Version: \tab 1.3\cr
-Date: \tab 02-11-2011\cr
+Version: \tab 2.1-\cr
+Date: \tab 2013-06-12\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
-icaDEN.fnc
-batch.icaDEN.fnc
-mc.batch.icaDEN.fnc
-plotICs.fnc
-batch.plotICs.fnc
-defineElectrodeSet.fnc
+You can access the PDF version of the package vignette from inside R by typing at an R prompt \code{browseVignettes(package = "icaOcularCorrection")}. This will open a web browser with links to the vignette PDF as well as a plain-text R file containing the code used in the vignette. The vignette files, both the PDF and the Rnw sources document, are located in the \code{doc} directory of an installed package (\code{inst/doc} for an uninstalled package tarball). The PDF, R, and Rnw versions of the vignette are located in \code{paste(system.file(package = "icaOcularCorrection"), "doc/", sep = "/")}. See <http://www.bioconductor.org/help/package-vignettes/> for more details.
 }
 \author{
-Antoine Tremblay, IWK Health Center
-
+Antoine Tremblay, NeuroCognitive Imaging Lab, Dalhousie University
 Maintainer: Antoine Tremblay <trea26@gmail.com>
 }
-\references{Flexer, A., Bauer, H., Pripfl, J. & Dorffner, G. (2005). Using ICA for removal of ocular artifacts in EEG recorded from blind subjects. Neural Networks, 18, 998-1005.}
+\references{
+Flexer, A., Bauer, H., Pripfl, J. & Dorffner, G. (2005). Using ICA for removal of ocular artifacts in EEG recorded from blind subjects. Neural Networks, 18, 998-1005.
+
+Hyvarinen, Aapo & Oja, Erkki. (1999). \emph{Independent Component Analysis: A Tutorial}. Available at \url{http://cis.legacy.ics.tkk.fi/aapo/papers/IJCNN99_tutorialweb/}.
+}
 \keyword{ package }
 \seealso{
-\code{\link{defineElectrodeSet.fnc}};
-\code{\link{eeg}};
-\code{\link{den}};
-\code{\link{icaDEN.fnc}};
-\code{\link{batch.icaDEN.fnc}};
-\code{\link{mc.batch.icaDEN.fnc}};
-\code{\link{plotICs.fnc}};
-\code{\link{batch.plotICs.fnc}}
+\code{\link{fastICA}};
+\code{\link{icac}};
+\code{\link{mwd.thrsh}};
+\code{\link{plot.avgba}};
+\code{\link{plot.trba}};
+\code{\link{plot.nic}};
+\code{\link{plot.tric}};
+\code{\link{summary.icac}};
+\code{\link{topo.ic}};
+\code{\link{update.icac}}.
 }
 \examples{
-data(eeg)
-head(eeg)
-# Create icaOcularCorrection object
-den = icaDEN.fnc(eeg, epoch.length = 192, 
-    method = "all", electrodes = c("Fp1", 
-    "Fp2", "AF3", "AF4", "F7", "F3", "Fz", 
-    "F4", "F8", "FC5", "FC1", "FC2", "FC6", 
-    "T7", "C3", "Cz", "C4", "T8", "CP5", 
-    "CP1", "CP2", "CP6", "P7", "P3", "Pz", 
-    "P4", "P8", "PO3", "PO4", "O1", "Oz", 
-    "O2"), eogs = list(VEOG = c("BE", "TE"), 
-    HEOG = c("LC", "RC")), threshold = 0.4, 
-    n.comp = 16, ret.SAWK = TRUE, 
-    verbose = TRUE)
-names(den)
-den$snr.ica
-
-# Plot ICs
-plotICs.fnc(den, epoch.length = 192, cor.only = 
-    FALSE, whichEOG = c("VEOG", "HEOG"), 
-    method = "all", dir.create.path = paste(getwd(), 
-    "/figs/", sep = ""), dir.create.name = "IC.plots", 
-    threshold = NA, nplots = c(2, 2), ask = TRUE, 
-    plot.EOG = TRUE, pdf.it = FALSE, pdf.prefix = 
-    "ICs_")
+### See vignette for examples.
 }

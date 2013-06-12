@@ -1,3 +1,79 @@
+TO-DO
+* It is nice to see how many trials significantly 
+correlate with a noise signal or all noise signals
+in general and then be able to remove it. So (1) add
+the option to correct or not (by trial), then get
+a summary of what correlates and to what extent,
+across nosie signals (as presently implemented in 
+summary.icac) but also add by noise signal (as an
+trigger in summary.icac; exactly the same, but per
+noise signal), (2) in vis.ic, add option to see a
+subset of ICs (the rows of the plot) for each trial
+(the pages), with or without a specific noise signal
+overlaid (with color coding for sig or non-sig),
+(3) based on this, update the icac object.
+
+--------------------
+version 2.3.4.4
+-----
+* VIGNETTE WILL NEED TO BE UPDATED!
+* Added functionality to function ``update.icac''.
+It can now sero-out or add back in whole ICs.
+* Added functions ``summary.icac'', ``topo.ic'', and
+``vis.ic''.
+* Renamed function ``plotSummary'' --> ``vis.smry''.
+* Tweaked all the plotting functions. Among other things, 
+k is always set to 5 and gamma is always set to 0.
+--------------------
+version 2.3.4.3
+-----
+* Revised the example in ``icaOcularCorrection''.
+--------------------
+version 2.3.4
+-----
+* Added function ``plotSummary''.
+--------------------
+version 2.3.2
+-----
+* Added package vignette in PDF, R, and Rnw formats.
+* Arbitrarily added ``set.seed(0)'' to function ``icac'' 
+to ensure reproducibility between runs. 
+* Revised function ``update.icac'' to accept ``method = zero-out''.
+* Set the default of argument ``method'' in function ``icac''
+to ``zero-out'', which is much faster than ``subtract'' and 
+appears to give the same results (although more testing is
+necessary to ascertain this 100%).
+* Revised the example in ``icaOcularCorrection''.
+--------------------
+version 2.3.1
+-----
+* Modified the example in ?icaOcularCorrection.
+--------------------
+version 2.3
+-----
+* Tweaked all the functions (except mwd.thrsh). There
+was a major tweak to function ``plot.icac''.
+* Change the name of function ``revise.icac'' to
+``update.icac'' to keep in line with existing functions
+with a similar functionality.
+--------------------
+version 2.2
+-----
+--------------------
+version 2.0
+-----
+Re-vamped the ICA denoising function and plotting 
+function as follows:
+* There are now only two funtions with enhanced 
+functionality, ``icac'' to correct for artifacts
+(ocular or other), and ``plot.icac'' to plot a an
+object of class ``icac'' returned by the function
+of the same name.
+* Function ``defineElectrodeSet'' is now named ``des''
+and accepts value ``egi.128'' in addition ot the previous
+ones.
+* Added function ``snr'' to calculate signal-to-noise
+ratios of an ``icac'' object.
 --------------------
 version 1.3
 -----
