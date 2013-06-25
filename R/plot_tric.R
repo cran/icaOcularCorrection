@@ -1,4 +1,4 @@
-plot.tric<-function(x,ic,noise.sig=NULL,S="S0",trial.cn="Trial",trials=NULL,n.win=10,new.page=TRUE,...){
+plot_tric<-function(x,ic,noise.sig=NULL,S="S0",trial.cn="Trial",trials=NULL,n.win=10,new.page=TRUE,...){
 	if(!"icac"%in%class(x))stop("object not of class \"icac\"\n")
 	if(missing(x))stop("please supply an \"icac\" object\n")
 	#if(missing(noise.sig))stop("please supply a noise signal\n")

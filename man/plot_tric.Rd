@@ -1,5 +1,5 @@
-\name{plot.tric}
-\alias{plot.tric}
+\name{plot_tric}
+\alias{plot_tric}
 \concept{EEG}
 \concept{electro-encephalogram}
 \concept{electroencephalogram}
@@ -16,7 +16,7 @@
 \title{Plot the time course of an independent component at each trial.}
 \description{Plots an independent component at each trial optionally with a noise
 signal overlaid on top of it.}
-\usage{\method{plot}{tric}(x, ic, noise.sig = NULL, S = "S0",
+\usage{plot_tric(x, ic, noise.sig = NULL, S = "S0",
 trial.cn = "Trial", trials = NULL, n.win = 10, 
 new.page = TRUE, ...)}
 \arguments{
@@ -37,11 +37,11 @@ new.page = TRUE, ...)}
 \code{\link{fastICA}};
 \code{\link{icac}};
 \code{\link{mwd.thrsh}};
-\code{\link{plot.avgba}};
-\code{\link{plot.trba}};
-\code{\link{plot.nic}};
+\code{\link{plot_avgba}};
+\code{\link{plot_trba}};
+\code{\link{plot_nic}};
 \code{\link{summary.icac}};
-\code{\link{topo.ic}};
+\code{\link{topo_ic}};
 \code{\link{update.icac}}.
 }
 \examples{

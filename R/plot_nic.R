@@ -1,4 +1,4 @@
-plot.nic<-function(x,
+plot_nic<-function(x,
 		   data,
 		   ic,
 		   trial,

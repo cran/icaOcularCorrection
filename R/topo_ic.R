@@ -1,4 +1,4 @@
-topo.ic<-function(x,
+topo_ic<-function(x,
 			   ic,
 			   coords=c("bosemi.32","egi.129","neuromag.306.mag",
 						"neuromag.306.plan1","neuromag.306.plan2"), 

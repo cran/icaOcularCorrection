@@ -31,11 +31,11 @@ print = TRUE, ...)}
 \code{\link{fastICA}};
 \code{\link{icac}};
 \code{\link{mwd.thrsh}};
-\code{\link{plot.avgba}};
-\code{\link{plot.trba}};
-\code{\link{plot.nic}};
-\code{\link{plot.tric}};
-\code{\link{topo.ic}};
+\code{\link{plot_avgba}};
+\code{\link{plot_trba}};
+\code{\link{plot_nic}};
+\code{\link{plot_tric}};
+\code{\link{topo_ic}};
 \code{\link{update.icac}}.	
 }
 \examples{

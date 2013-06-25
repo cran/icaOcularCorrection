@@ -1,5 +1,5 @@
-\name{plot.nic}
-\alias{plot.nic}
+\name{plot_nic}
+\alias{plot_nic}
 \concept{EEG}
 \concept{electro-encephalogram}
 \concept{electroencephalogram}
@@ -15,7 +15,7 @@
 \concept{event related magnetic fields}
 \title{Plot an independent component with superimposed noise signal at a particular trial.}
 \description{The function takes an \code{icac} object as returned by function \code{icac} and plots an independent component with superimposed noise signal at a particular trial.}
-\usage{\method{plot}{nic}(x, data, ic, trial, noise.sig, 
+\usage{plot_nic(x, data, ic, trial, noise.sig, 
 threshold = x$threshold, col = c("black", "blue"), 
 main = NULL, xlab = NULL, ylab = NULL, xlim = NULL, 
 ylim = NULL, cex = 0.7, trial.cn = "Trial", ...)}
@@ -42,11 +42,11 @@ ylim = NULL, cex = 0.7, trial.cn = "Trial", ...)}
 \code{\link{fastICA}};
 \code{\link{icac}};
 \code{\link{mwd.thrsh}};
-\code{\link{plot.avgba}};
-\code{\link{plot.trba}};
-\code{\link{plot.tric}};
+\code{\link{plot_avgba}};
+\code{\link{plot_trba}};
+\code{\link{plot_tric}};
 \code{\link{summary.icac}};
-\code{\link{topo.ic}};
+\code{\link{topo_ic}};
 \code{\link{update.icac}}.
 }
 \examples{

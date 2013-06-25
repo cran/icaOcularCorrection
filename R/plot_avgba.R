@@ -1,4 +1,4 @@
-plot.avgba<-function(x,data,channel=NULL,n.win=NULL,
+plot_avgba<-function(x,data,channel=NULL,n.win=NULL,
 				 new.page=TRUE,time.cn="Time",...){
 	if(!"icac"%in%class(x))stop("object not of class \"icac\"\n")
 	if(missing(x))stop("please supply an \"icac\" object\n")

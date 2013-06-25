@@ -93,12 +93,12 @@ Hyvarinen, Aapo & Oja, Erkki. (1999). \emph{Independent Component Analysis: A Tu
 \seealso{
 \code{\link{fastICA}};
 \code{\link{mwd.thrsh}};
-\code{\link{plot.avgba}};
-\code{\link{plot.trba}};
-\code{\link{plot.nic}};
-\code{\link{plot.tric}};
+\code{\link{plot_avgba}};
+\code{\link{plot_trba}};
+\code{\link{plot_nic}};
+\code{\link{plot_tric}};
 \code{\link{summary.icac}};
-\code{\link{topo.ic}};
+\code{\link{topo_ic}};
 \code{\link{update.icac}}.
 }
 \examples{

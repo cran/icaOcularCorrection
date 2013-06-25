@@ -1,33 +1,12 @@
-
 \documentclass[12pt]{apa}
 
-\usepackage[utf8]{inputenc}
 \usepackage{Sweave}
-\usepackage{times}
-\usepackage{amsmath,amsfonts,amssymb,psfrag,color,pbox,subfigure,graphicx}
 \usepackage{graphicx}
 \usepackage{rotating}
-\usepackage{color}
-\usepackage{syntonly}
 \usepackage{verbatim}
 \usepackage{enumerate}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{booktabs}
-\usepackage{tipa}
 \usepackage[margin=0.75in]{geometry}
-\usepackage{url}
-\usepackage{tabularx}
-\usepackage{linguex}
-\usepackage{gb4e}
 \usepackage{fancyhdr}
-\usepackage[T1]{fontenc}
-\usepackage[english]{babel}
-%\usepackage{mathptmx}
-%\usepackage{ctable}
-%\usepackage{threeparttable}
-
-\selectlanguage{english}
 
 % some commands for avoiding floats flushed to the end
     \renewcommand{\topfraction}{0.9}	% max fraction of floats at top
@@ -44,14 +23,6 @@
 \DefineVerbatimEnvironment{Soutput}{Verbatim}
 {formatcom={\vspace{-0.5ex}},fontfamily=courier,fontseries=b,%
   fontsize=\scriptsize}
-
-%\SweaveOpts{engine=R,eps=FALSE,pdf=TRUE,strip.white=all,keep.source=TRUE}
-%\SweaveOpts{engine=R,eps=FALSE,pdf=TRUE,keep.source=TRUE}
-\SweaveOpts{engine=R,eps=FALSE,pdf=TRUE}
-\SweaveOpts{prefix=TRUE,prefix.string=fig,include=FALSE}
-\SweaveOpts{keep.blank.space=TRUE}
-
-
 
 \setlength{\headheight}{15.2pt}
 \pagestyle{fancyplain}
@@ -79,12 +50,11 @@ versions of the package.
 \setcounter{tocdepth}{5}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
+
 \maketitle
-\rule[0.25mm]{18cm}{0.25mm}
 \tableofcontents
-\ \\
-\rule[0.25mm]{18cm}{0.25mm}
 
 {\section{Introduction}
 The correction method proposed in this package is largely based on the method
@@ -104,12 +74,12 @@ that was passed to function {\tt icac}.
 
 The user can then identify which ICs correlate with the noise signals the most
 by looking at the summary of the {\tt icac} object (using function {\tt
-summary.icac}), the scalp topography of the ICs (using function {\tt topo.ic}),
-the time courses of the ICs (using functions {\tt plot.tric} and {\tt
-plot.nic}, and other diagnostic plots. Once these ICs have been identified,
+summary.icac}), the scalp topography of the ICs (using function {\tt topo\_ic}),
+the time courses of the ICs (using functions {\tt plot\_tric} and {\tt
+plot\_nic}, and other diagnostic plots. Once these ICs have been identified,
 they can be completely zeroed-out or subtracted using function {\tt
 update.icac} and the resulting correction checked using functions {\tt
-plot.avgba} and {\tt plot.trba}. Some worked-out examples with {\tt R} code are
+plot\_avgba} and {\tt plot\_trba}. Some worked-out examples with {\tt R} code are
 provided in the following sections. Please contact Antoine Tremblay
 {\tt trea26@gmail.com} to obtain the data to run the examples.
 }
@@ -166,19 +136,19 @@ approximately 70 minutes to complete.
 Let's now have a look at the first 10 rows of the overall summary.
 <<egi129SummaryTopTen,eval=FALSE,echo=TRUE,results=hide>>=
 smry  <- summary(res, print = FALSE)
-save(smry, file = "summaries/smry_egi129.rda")
+save(smry, file = "smryEGI129.rda")
 #
 smry  <- summary(res, ic = 52, print = FALSE)
-save(smry, file = "summaries/smry_egi129_IC52.rda")
+save(smry, file = "smryEGI129IC52.rda")
 #
 smry  <- summary(res, ic = 6, print = FALSE)
-save(smry, file = "summaries/smry_egi129_IC6.rda")
+save(smry, file = "smryEGI129IC6.rda")
 #
 smry  <- summary(res, ic = 43, print = FALSE)
-save(smry, file = "summaries/smry_egi129_IC43.rda")
+save(smry, file = "smryEGI129IC43.rda")
 @
-<<ShowEGI129SummaryTopTen,eval=FALSE,echo=TRUE>>=
-load("summaries/smry_egi129.rda")
+<<ShowEGI129SummaryTopTen,eval=TRUE,echo=TRUE>>=
+load("smryEGI129.rda")
 smry[1:10,]
 @
 
@@ -187,42 +157,42 @@ and E127 above the threshold of 0.4 in more trials than any other independent
 component (\Sexpr{smry[1,2]}, \Sexpr{smry[2,2]}, and \Sexpr{smry[3,2]} trials,
 respectively). 
 
-<<loadEGI129resIC101,eval=FALSE,echo=TRUE>>=
-load("summaries/smry_egi129_IC52.rda")
+<<loadEGI129resIC101,eval=TRUE,echo=TRUE>>=
+load("smryEGI129IC52.rda")
 smry
 @
 
 As can be seen from the summary, IC 52 correlated mostly with channel E14
-(\Sexpr{smry[1,3]} trials). Figure~\ref{fig:IC52E14} on
-page~\pageref{fig:IC52E14} plots IC 52 against channel E14 at trials 85 to 104.
+(\Sexpr{smry[1,3]} trials). Figure \ref{fig:IC52E14} on
+page \pageref{fig:IC52E14} plots IC 52 against channel E14 at trials 85 to 104.
 The blue (at or above threshold) or grey (below threshold) lines are channel
 E14.
 
 <<plotIC52E14,eval=FALSE,echo=TRUE>>=
 # IC 52 mostly correlates with channel E14
-pdf(file="figs/fig-IC52E14.pdf")
-plot.tric(res, ic = 52, noise.sig = "E14",
+pdf(file="IC52E14.pdf")
+plot_tric(res, ic = 52, noise.sig = "E14",
 	trials = 85:104, n.win = 21, new.page = FALSE)
 dev.off()
 @
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-IC52E14.pdf}
+  \includegraphics{IC52E14.pdf}
   \caption{Independent component 52 (black lines) and channel E14 (right bottom eye; blue lines when correlation was at or above threshold; grey lines when it was below threshold) at trials 85 to 104. Positive is plotted up.}
   \label{fig:IC52E14}
 \end{figure}
 
-We can also use function {\tt plot.nic} to look at an IC and a noise signal at
-specific trials. In Figure~\ref{fig:plotNICIC52E14} on
-page~\pageref{fig:plotNICIC52E14} we look at at trials 85 to
+We can also use function {\tt plot\_nic} to look at an IC and a noise signal at
+specific trials. In Figure \ref{fig:plotNICIC52E14} on
+page \pageref{fig:plotNICIC52E14} we look at at trials 85 to
 93.
 
 <<plotNIC52E14,eval=FALSE,echo=TRUE>>=
-pdf("figs/fig-plotNICIC52E14.pdf")
+pdf("plotNICIC52E14.pdf")
 par(mfrow = c(3, 3))
 for(i in 85:93){
-	plot.nic(x = res, data = egi129, ic = 52, 
+	plot_nic(x = res, data = egi129, ic = 52, 
 		trial = i, noise.sig = "E14")
 }
 par(mfrow = c(1, 1))
@@ -231,7 +201,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-plotNICIC52E14.pdf}
+  \includegraphics{plotNICIC52E14.pdf}
   \caption{Independent component 52 and channel E14 at trials 85 to 93. The
   correlation between IC 52 and channel E14 at a specific trial is indicated at
   the top left of each plot. It is blue if the correlation is at or above
@@ -241,18 +211,18 @@ dev.off()
 \end{figure}
 
 The activity captured in IC 52 should thus be apparent at the very front of
-the scalp, about where the eyes are. Figure~\ref{fig:topomapIC52} on
-page~\pageref{fig:topomapIC52} shows that this is the case.
+the scalp, about where the eyes are. Figure \ref{fig:topomapIC52} on
+page \pageref{fig:topomapIC52} shows that this is the case.
 
 <<topomapIC52,eval=FALSE,echo=TRUE>>=
-pdf("figs/fig-topomapIC52.pdf")
-topo.ic(x = res, ic = 52, coords = "egi.129") 
+pdf("topomapIC52.pdf")
+topo_ic(x = res, ic = 52, coords = "egi.129") 
 dev.off()
 @
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-topomapIC52.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{topomapIC52.pdf}
   \caption{Topographic map of independent component 52. The bottom of the plot
   corresponds to the back of the head and the top of the plot to the front of
   the head. Yellow represents positive amplitudes and blue represents negative
@@ -262,38 +232,40 @@ dev.off()
 
 Let's now have a look at the summary for IC 6.
 
-<<loadSummaryIC6,eval=FALSE,echo=TRUE>>=
-load("summaries/smry_egi129_IC6.rda")
+<<loadSummaryIC6,eval=TRUE,echo=TRUE>>=
+load("smryEGI129IC6.rda")
 smry
 @
 
-IC 6 correlates mostly with channel E14 (\Sexpr{smry[smry$NoiseSignal=="E14",3]} trials). We will nevertheless look at IC 6 against noise signal
-E126 (\Sexpr{smry[smry$NoiseSignal=="E126", 3]} trials).
+IC 6 correlates mostly with channel E14
+(\Sexpr{smry[smry$NoiseSignal=="E14",3]} trials). We will nevertheless look at
+IC 6 against noise signal E126 (\Sexpr{smry[smry$NoiseSignal=="E126", 3]}
+trials).
 
 <<plotIC6E126,eval=FALSE,echo=TRUE>>=
-pdf(file="figs/fig-IC6E126.pdf")
-plot.tric(res, ic = 6, noise.sig = "E126",
+pdf(file="IC6E126.pdf")
+plot_tric(res, ic = 6, noise.sig = "E126",
 	trials = 253:273, n.win = 21, new.page = FALSE)
 dev.off()
 @
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-IC6E126.pdf}
+  \includegraphics{IC6E126.pdf}
   \caption{Independent component 6 (black lines) and channel E126 (blue lines
   when correlation was at or above threshold; grey lines when it was below
   threshold) at trials 253 to 273. Positive is plotted up.}
   \label{fig:plotNICIC6E126}
 \end{figure}
 
-Figure~\ref{fig:plotNICIC6E126} on page~\pageref{fig:plotNICIC6E126} shows
+Figure \ref{fig:plotNICIC6E126} on page \pageref{fig:plotNICIC6E126} shows
 another view of IC 6 and channel E126 at trials 253 to 273.
 
 <<plotNIC6E126,eval=FALSE,echo=TRUE>>=
-pdf("figs/fig-plotNICIC6E126.pdf")
+pdf("plotNICIC6E126.pdf")
 par(mfrow = c(3, 3))
 for(i in 253:261){
-	plot.nic(x = res, data = egi129, ic = 6, 
+	plot_nic(x = res, data = egi129, ic = 6, 
 		trial = i, noise.sig = "E126")
 }
 par(mfrow = c(1, 1))
@@ -302,7 +274,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-plotNICIC6E126}
+  \includegraphics{plotNICIC6E126}
   \caption{Independent component 6 and channel E126 at trials 253 to 261
   The correlation between IC 6 and channel E126 at a specific trial is
   indicated at the top left of each plot. It is blue if the correlation is at
@@ -312,14 +284,14 @@ dev.off()
 \end{figure}
 
 <<topomapIC6,eval=FALSE,echo=TRUE>>=
-pdf("figs/fig-topomapIC6")
-topo.ic(x = res, ic = 6, coords = "egi.129") 
+pdf("topomapIC6")
+topo_ic(x = res, ic = 6, coords = "egi.129") 
 dev.off()
 @
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-topomapIC6.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{topomapIC6.pdf}
   \caption{Topographic map of independent component 6. The bottom of the plot
   corresponds to the back of the head and the top of the plot to the front of
   the head. Yellow represents positive amplitudes and blue represents negative
@@ -327,41 +299,42 @@ dev.off()
   \label{fig:topomapIC6}
 \end{figure}
 
-The centro-frontal location of IC 6 apparent in Figure~\ref{fig:topomapIC6} on
-page~\pageref{fig:topomapIC6} corroborates that it is mostly composed of
+The centro-frontal location of IC 6 apparent in Figure \ref{fig:topomapIC6} on
+page \pageref{fig:topomapIC6} corroborates that it is mostly composed of
 blinks. Finally, let's have a look at the summary for IC 43.
 
-<<loadSummaryIC43,eval=FALSE,echo=TRUE>>=
-load("summaries/smry_egi129_IC43.rda")
+<<loadSummaryIC43,eval=TRUE,echo=TRUE>>=
+load("smryEGI129IC43.rda")
 smry
 @
 
-IC 43 correlates mostly with channel E21 (\Sexpr{smry[smry$NoiseSignal=="E21",3]} trials). 
+IC 43 correlates mostly with channel E21
+(\Sexpr{smry[smry$NoiseSignal=="E21",3]} trials). 
 
 <<plotIC43E21,eval=FALSE,echo=TRUE>>=
-pdf(file="figs/fig-IC43E21.pdf")
-plot.tric(res, ic = 43, noise.sig = "E21",
+pdf(file="IC43E21.pdf")
+plot_tric(res, ic = 43, noise.sig = "E21",
 	trials = 1:21, n.win = 21, new.page = FALSE)
 dev.off()
 @
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-IC43E21.pdf}
+  \includegraphics{IC43E21.pdf}
   \caption{Independent component 43 (black lines) and channel E21 (blue lines
   when correlation was at or above threshold; grey lines when it was below
   threshold) at trials 1 to 21. Positive is plotted up.}
   \label{fig:egi129IC18}
 \end{figure}
 
-Figure~\ref{fig:plotNICIC43E21} on page~\pageref{fig:plotNICIC43E21} shows
+Figure \ref{fig:plotNICIC43E21} on page \pageref{fig:plotNICIC43E21} shows
 another view of IC 43 and channel E21 at trials 1 to 21.
 
 <<plotNIC43E21,eval=FALSE,echo=TRUE>>=
-pdf("figs/fig-plotNICIC43E21.pdf")
+pdf("plotNICIC43E21.pdf")
 par(mfrow = c(3, 3))
 for(i in 1:9){
-	plot.nic(x = res, data = egi129, ic = 43, 
+	plot_nic(x = res, data = egi129, ic = 43, 
 		trial = i, noise.sig = "E21")
 }
 par(mfrow = c(1, 1))
@@ -370,7 +343,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-plotNICIC43E21}
+  \includegraphics{plotNICIC43E21}
   \caption{Independent component 43 and channel E21 at trials 1 to 21. The
   correlation between IC 43 and channel E21 at a specific trial is indicated at
   the top left of each plot. It is blue if the correlation is at or above
@@ -380,14 +353,14 @@ dev.off()
 \end{figure}
 
 <<topomapIC43,eval=FALSE,echo=TRUE>>=
-pdf("figs/fig-topomapIC43")
-topo.ic(x = res, ic = 43, coords = "egi.129") 
+pdf("topomapIC43")
+topo_ic(x = res, ic = 43, coords = "egi.129") 
 dev.off()
 @
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-topomapIC43.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{topomapIC43.pdf}
   \caption{Topographic map of independent component 43. The bottom of the plot
   corresponds to the back of the head and the top of the plot to the front of
   the head. Yellow represents positive amplitudes and blue represents negative
@@ -395,8 +368,8 @@ dev.off()
   \label{fig:topomapIC43}
 \end{figure}
 
-It is apparent in Figure~\ref{fig:topomapIC43} on
-page~\pageref{fig:topomapIC43} that the scalp topography of IC 43 is also
+It is apparent in Figure \ref{fig:topomapIC43} on
+page \pageref{fig:topomapIC43} that the scalp topography of IC 43 is also
 frontal, thus corroborating that it is mostly composed of blinks.
 }
 
@@ -546,7 +519,7 @@ avg.cor <- tapply(eog.cor$E21, eog.cor$Time, mean)
 time <- as.numeric(names(avg.uncor))
 #
 # create plot
-pdf(file = "figs/fig-uncorrectedCorrected0.pdf")
+pdf(file = "uncorrectedCorrected0.pdf")
 par(mfrow = c(2, 2), mar = c(5.1, 4.1, 4.1, 2.1))
 # plot waveforms
 plot(time, avg.uncor - min(avg.uncor), type = "l",
@@ -576,7 +549,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-uncorrectedCorrected0.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{uncorrectedCorrected0.pdf}
   \caption{Top left panel: Uncorrected (black) and corrected (red) waveforms at
   channel E21. Bottom left panel: Topographic map of uncorrected blinks. Bottom
   righ panel: Topographic map of corrected blinks.}
@@ -584,17 +557,17 @@ dev.off()
 \end{figure}
 
 A graph of the blinks before and after correction is shown in
-Figure~\ref{fig:UncorCor0}. Although the trial-by-trial approach goes a long
+Figure \ref{fig:UncorCor0}. Although the trial-by-trial approach goes a long
 way in removing blinks from the data, it nevertheless misses a number of trials
 that contain them. If we look at a plot that shows the number of trials that
 correlated at or above threshold for each IC, a first break apparent at IC 43
-as shown by the red dotted line in Figure~\ref{fig:thirdbreak}. We have seen
+as shown by the red dotted line in Figure \ref{fig:thirdbreak}. We have seen
 above that some noise channels did not correlate at or above threshold at some
 trials.
 
 {% Rcode: first break
 <<lookAtNumTrials3,eval=FALSE,echo=TRUE>>=
-pdf(file="figs/fig-ICNumTrials3.pdf")
+pdf(file="ICNumTrials3.pdf")
 plot(smry$NumTrial, type = "h", xlab="IC", ylab = "Number of Trials", 
 	xaxt = "n")
 myat<-pretty(1:nrow(smry), 10)
@@ -610,7 +583,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-ICNumTrials3.pdf}
+  \includegraphics{ICNumTrials3.pdf}
   \caption{Number of Trials that correlate at or above threshold for each IC.
   Red dotted line shows where the first break occurs.}
   \label{fig:firstbreak}
@@ -690,7 +663,7 @@ avg.cor2 <- tapply(eog.cor2$E21, eog.cor2$Time, mean)
 time <- as.numeric(names(avg.uncor))
 #
 # create plot
-pdf(file = "figs/fig-uncorrectedCorrected3.pdf")
+pdf(file = "uncorrectedCorrected3.pdf")
 par(mfrow = c(2, 2), mar = c(5.1, 4.1, 4.1, 2.1))
 # plot waveforms
 plot(time, avg.uncor - min(avg.uncor), type = "l",
@@ -720,7 +693,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-uncorrectedCorrected3.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{uncorrectedCorrected3.pdf}
   \caption{Top left panel: Uncorrected (black) and corrected (red) waveforms at
   channel E21. Bottom left panel: Topographic map of uncorrected blinks. Bottom
   righ panel: Topographic map of corrected blinks (top 3 ICs completely
@@ -728,14 +701,14 @@ dev.off()
   \label{fig:UncorCor3}
 \end{figure}
 
-It is apparent from Figure~\ref{fig:UncorCor3} that the correction is improved.
+It is apparent from Figure \ref{fig:UncorCor3} that the correction is improved.
 There nevertheless remains a small portion of eye-blinks as evidence by the
 small bump in the top left panel (red line). A plot of the number of trials that
-correlated at or above threshold for each IC (Figure~\ref{fig:secondbreak}) shows that there is a second break at IC 115. 
+correlated at or above threshold for each IC (Figure \ref{fig:secondbreak}) shows that there is a second break at IC 115. 
 
 {% Rcode: second break
 <<lookAtNumTrials5,eval=FALSE,echo=TRUE>>=
-pdf(file="figs/fig-ICNumTrials5.pdf")
+pdf(file="ICNumTrials5.pdf")
 plot(smry$NumTrial, type = "h", xlab="IC", ylab = "Number of Trials", 
 	xaxt = "n")
 myat<-pretty(1:nrow(smry), 10)
@@ -751,7 +724,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-ICNumTrials5.pdf}
+  \includegraphics{ICNumTrials5.pdf}
   \caption{Number of Trials that correlate at or above threshold for each IC.
   Red dotted line shows where the second break occurs.}
   \label{fig:secondbreak}
@@ -829,7 +802,7 @@ avg.cor2 <- tapply(eog.cor2$E21, eog.cor2$Time, mean)
 time <- as.numeric(names(avg.uncor))
 #
 # create plot
-pdf(file = "figs/fig-uncorrectedCorrected2.pdf")
+pdf(file = "uncorrectedCorrected2.pdf")
 par(mfrow = c(2, 2), mar = c(5.1, 4.1, 4.1, 2.1))
 # plot waveforms
 plot(time, avg.uncor - min(avg.uncor), type = "l",
@@ -916,7 +889,7 @@ avg.cor3 <- tapply(eog.cor3$E21, eog.cor3$Time, mean)
 time <- as.numeric(names(avg.uncor))
 #
 # create plot
-pdf(file = "figs/fig-uncorrectedCorrected5.pdf")
+pdf(file = "uncorrectedCorrected5.pdf")
 par(mfrow = c(2, 2), mar = c(5.1, 4.1, 4.1, 2.1))
 # plot waveforms
 plot(time, avg.uncor - min(avg.uncor), type = "l",
@@ -944,11 +917,11 @@ dev.off()
 @
 }
 
-Figure~\ref{fig:UncorCor5} shows that the blinks are completely removed. 
+Figure \ref{fig:UncorCor5} shows that the blinks are completely removed. 
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-uncorrectedCorrected5.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{uncorrectedCorrected5.pdf}
   \caption{Top left panel: Uncorrected (black) and corrected (red) waveforms at
   channel E21. Bottom left panel: Topographic map of uncorrected blinks. Bottom
   righ panel: Topographic map of corrected blinks (top 5 ICs completely
@@ -957,13 +930,13 @@ Figure~\ref{fig:UncorCor5} shows that the blinks are completely removed.
 \end{figure}
 
 There is a third break apparent at IC 16 as shown by the red dotted line in
-Figure~\ref{fig:thirdbreak}. Let's completely zero-out all the ICs up to that
+Figure \ref{fig:thirdbreak}. Let's completely zero-out all the ICs up to that
 point (i.e., 12 ICs) and see if anything is gained in terms of the quality of
 the correction.
 
 {% Rcode: third break
 <<lookAtNumTrials12,eval=FALSE,echo=TRUE>>=
-pdf(file="figs/fig-ICNumTrials12.pdf")
+pdf(file="ICNumTrials12.pdf")
 plot(smry$NumTrial, type = "h", xlab="IC", ylab = "Number of Trials", 
 	xaxt = "n")
 myat<-pretty(1:nrow(smry), 10)
@@ -979,7 +952,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figs/fig-ICNumTrials12.pdf}
+  \includegraphics{ICNumTrials12.pdf}
   \caption{Number of Trials that correlate at or above threshold for each IC.
   Red dotted line shows where the third break occurs.}
   \label{fig:thirdbreak}
@@ -1056,7 +1029,7 @@ avg.cor4 <- tapply(eog.cor4$E21, eog.cor4$Time, mean)
 time <- as.numeric(names(avg.uncor))
 #
 # create plot
-pdf(file = "figs/fig-uncorrectedCorrected12.pdf")
+pdf(file = "uncorrectedCorrected12.pdf")
 par(mfrow = c(2, 2), mar = c(5.1, 4.1, 4.1, 2.1))
 # plot waveforms
 plot(time, avg.uncor - min(avg.uncor), type = "l",
@@ -1090,13 +1063,13 @@ save(avg.cor,avg.cor2,avg.cor3,avg.cor4,avg.dat.cor,avg.dat.cor2,
 @
 }
 
-It is evident in Figure~\ref{fig:UncorCor12} that we are not gaining anything
+It is evident in Figure \ref{fig:UncorCor12} that we are not gaining anything
 by completely zeroing-out seven additional ICs, at least regarding blinks. In
 fact, by removing these extra ICs we might be removing signal of interest.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-uncorrectedCorrected12.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{uncorrectedCorrected12.pdf}
   \caption{Top left panel: Uncorrected (black) and corrected (red) waveforms at
   channel E21. Bottom left panel: Topographic map of uncorrected blinks. Bottom
   righ panel: Topographic map of corrected blinks (top 12 ICs completely
@@ -1106,7 +1079,7 @@ fact, by removing these extra ICs we might be removing signal of interest.
 
 We will thus settle with zeroing-out portions of ICs that correspond to the
 trials at which an IC correlated with a noise signal at or above threshold, in
-addition to the five ICs that correlated with the greatest number of trials. The uncorrected and corrected averages at ten midline electrodes are illustrated in Figure~\ref{fig:bf5ic}.
+addition to the five ICs that correlated with the greatest number of trials. The uncorrected and corrected averages at ten midline electrodes are illustrated in Figure \ref{fig:bf5ic}.
 
 {% Rcode: before and after averages
 <<plotBeforeAfterAverages,eval=FALSE,echo=TRUE>>=
@@ -1118,8 +1091,8 @@ colnames(mat) <- pi.cor$ym
 save(mat, file = "data/egi129NetMask.rda", compress = "xz")
 #
 # plot before and after averages
-pdf(file = "figs/fig-beforeAfter5IC.pdf")
-plot.avgba(x = res.up2, data = egi129, channel = c("E17", "E11",
+pdf(file = "beforeAfter5IC.pdf")
+plot_avgba(x = res.up2, data = egi129, channel = c("E17", "E11",
 	"E16", "E6", "E129", "E55", "E62", "E72", "E75", "E81"),
 	ylim = c(-5, 5), new.page = FALSE)
 #
@@ -1149,7 +1122,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-beforeAfter5IC.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{beforeAfter5IC.pdf}
   \caption{uncorrected averages (black lines) and corrected averages (blue
   lines) at midline channels (in red font in the scalp inset at the bottom
   right).}
@@ -1163,12 +1136,12 @@ dev.off()
   Correction Function}
 Here we compare the difference in correction between {\tt EEGLAB} and {\tt
 icaOcularCorrection}. The comparison is illustrated in
-Figure~\ref{fig:eeglabVSicOc} on page~\pageref{fig:eeglabVSicOc}. The two
+Figure \ref{fig:eeglabVSicOc} on page \pageref{fig:eeglabVSicOc}. The two
 corrections are comparable, but {\tt EEGLAB} outperforms {\tt
 icaOcularCorrection}. It is important to note, however, that the bad channels
 and trials were removed from the data prior to correcting it with {\tt EEGLAB}.
 In another version we will use {\tt icaOcularCorrection} to correct the data
-used in the {\tt eEGLAB} correction.
+used in the {\tt EEGLAB} correction.
 
 {% format EEGLAB before correction data
 <<formatEEGLABbeforeData,eval=FALSE,echo=FALSE>>=
@@ -1353,20 +1326,20 @@ load("data/mc12artrejEEGLAB.rda")
 dat <- dat[dat$Time >= -200 & dat$Time <= 1500, ]
 rownames(dat)<-1:nrow(dat)
 # 
-pdf(file="fig-eeglab.pdf")
-plot.avgba(x = eeglab, data = dat, channel = c("E17", "E11",
+pdf(file="eeglab.pdf")
+plot_avgba(x = eeglab, data = dat, channel = c("E17", "E11",
 	"E16", "E6", "E129", "E55", "E62", "E72", "E75", "E81"), 
 	ylim = c(-5, 5), new.page = FALSE)
 dev.off()
 
 dev.new()
-plot.trba(x = eeglab, data = dat, channel = "E21")
+plot_trba(x = eeglab, data = dat, channel = "E21")
 
 cor(eeglab$data$E21, dat$E21)
 # [1] 0.03127444
 #
-pdf(file="fig-eeglab.pdf")
-plot.trba(x = eeglab, data = dat, channel = "E21", new.page = FALSE)
+pdf(file="eeglab.pdf")
+plot_trba(x = eeglab, data = dat, channel = "E21", new.page = FALSE)
 dev.off()
 @
 }
@@ -1546,7 +1519,7 @@ avg.cor <- tapply(eeglab.cor$E21, eeglab.cor$Time, mean)
 time <- as.numeric(names(avg.uncor))
 #
 # create plot
-pdf(file = "figs/fig-EEGLABuncorrectedCorrected.pdf")
+pdf(file = "EEGLABuncorrectedCorrected.pdf")
 par(mfrow = c(2, 2), mar = c(5.1, 4.1, 4.1, 2.1))
 # plot waveforms
 plot(time, avg.uncor - min(avg.uncor), type = "l",
@@ -1580,7 +1553,7 @@ save(avg.eeglab.cor,avg.eeglab.uncor,eeglab.cor,eeglab.uncor,
 
 {% Rcode: EEGLAB versus icaOcularCorrection plot
 <<EEGLABvsICAocularCorrection,eval=FALSE,echo=TRUE>>=
-pdf(file = "figs/fig-EEGLABvsICAocularCorrection.pdf")
+pdf(file = "EEGLABvsICAocularCorrection.pdf")
 par(mfrow = c(2, 2), mar = c(5.1, 4.1, 4.1, 2.1))
 # plot waveforms
 avg.uncor <- tapply(eeglab.uncor$E21, eeglab.uncor$Time, mean)
@@ -1629,7 +1602,7 @@ dev.off()
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{figs/fig-EEGLABvsICAocularCorrection.pdf}
+  \includegraphics[width=0.55\textwidth,height=0.4\textheight]{EEGLABvsICAocularCorrection.pdf}
   \caption{Top left panel: {\tt EEGLAB} uncorrected (121 channels and 379
   trials; black line), {\tt EEGLAB} corrected (red), {\tt icaOcularCorrection}
   uncorrected (129 channels and 472 trials; green line), and {\tt
@@ -1645,20 +1618,32 @@ dev.off()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Galvanic Skin Response Noise}
 
+Coming soon.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Correcting for Artifacts in {\sc meg} Recordings}
+
+Coming soon.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ocular ({\sc eog}) Artifacts}
 
+Coming soon.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Muscle ({\sc emg}) Artifacts}
+
+Coming soon.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Heart Beat ({\sc ecg}/{\sc ekg}) Artifacts}
 
+Coming soon.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Environmental Noise}
+
+Coming soon.
 
 \newpage
 \bibliography{data}

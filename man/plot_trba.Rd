@@ -1,5 +1,5 @@
-\name{plot.trba}
-\alias{plot.trba}
+\name{plot_trba}
+\alias{plot_trba}
 \concept{EEG}
 \concept{electro-encephalogram}
 \concept{electroencephalogram}
@@ -15,7 +15,7 @@
 \concept{event related magnetic fields}
 \title{Plot the corrected and uncorrected time course at a specific channel for each trial.}
 \description{For each trial, the corrected (blue line) and uncorrected (black line) are plotted. Optionally, a noise signal can be superimposed (grey line).}
-\usage{\method{plot}{trba}(x, data, channel, noise.sig = NULL, 
+\usage{plot_trba(x, data, channel, noise.sig = NULL, 
 n.win = 10, new.page = TRUE, trial.cn = "Trial", ...)}
 \arguments{
   \item{x}{An \code{icac} object as returned by the function of the same name.}
@@ -33,11 +33,11 @@ n.win = 10, new.page = TRUE, trial.cn = "Trial", ...)}
 \code{\link{fastICA}};
 \code{\link{icac}};
 \code{\link{mwd.thrsh}};
-\code{\link{plot.avgba}};
-\code{\link{plot.nic}};
-\code{\link{plot.tric}};
+\code{\link{plot_avgba}};
+\code{\link{plot_nic}};
+\code{\link{plot_tric}};
 \code{\link{summary.icac}};
-\code{\link{topo.ic}};
+\code{\link{topo_ic}};
 \code{\link{update.icac}}.
 }
 \examples{

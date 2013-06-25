@@ -1,8 +1,8 @@
 Package: icaOcularCorrection
 Type: Package
 Title: Independent Components Analysis (ICA) based artifact correction.
-Version: 2.1
-Date: 2013-06-12
+Version: 2.2.4
+Date: 2013-06-25
 Depends: fastICA, mgcv
 Author: Antoine Tremblay, NeuroCognitive Imaging Lab, Dalhousie
         University
@@ -24,26 +24,22 @@ Description: Removes eye-movement and other types of known (i.e.,
         other noise signals. Subsequently, portions of an IC
         corresponding to trials at which the correlation between it and
         a noise signal was at or above threshold (set to 0.4 by
-        default; Flexer et al., 2005, p. 1001) are either zeroed-out in
-        the source matrix, ``S'', or subtracted from the data that was
-        passed to function ``icac''. The user can then identify which
-        ICs correlate with the noise signals the most by looking at the
+        default; Flexer et al., 2005, p. 1001) are zeroed-out in the
+        source matrix, ``S''. The user can then identify which ICs
+        correlate with the noise signals the most by looking at the
         summary of the ``icac'' object (using function
         ``summary.icac''), the scalp topography of the ICs (using
-        function ``topo.ic''), the time courses of the ICs (using
-        functions (``plot.tric'') and ``plot.nic'', and other
-        diagnostic plots. Once these ICs have been identified, they can
-        be completely zeroed-out or subtracted using function
-        ``update.icac'' and the resulting correction checked using
-        functions ``plot.avgba'' and ``plot.trba''. Some worked-out
-        examples with R code are provided in the following sections.
-        Please contact the package maintainer to obtain the data to run
-        the examples.
+        function ``topo_ic''), the time courses of the ICs (using
+        functions ``plot_tric'' and ``plot_nic''), and other diagnostic
+        plots. Once these ICs have been identified, they can be
+        completely zeroed-out using function ``update.icac'' and the
+        resulting correction checked using functions ``plot_avgba'' and
+        ``plot_trba''. Some worked-out examples with R code are
+        provided in the package vignette.
 Suggests: wavethresh
-BuildVignettes: no
 License: GPL-2
 LazyLoad: yes
-Packaged: 2013-06-12 18:07:21 UTC; antoine
+Packaged: 2013-06-25 16:16:11 UTC; ncil
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-06-12 20:18:57
+Date/Publication: 2013-06-25 18:35:06

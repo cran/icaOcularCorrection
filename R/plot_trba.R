@@ -1,4 +1,4 @@
-plot.trba<-function(x,data,channel,noise.sig=NULL,n.win=10,
+plot_trba<-function(x,data,channel,noise.sig=NULL,n.win=10,
 				   new.page=TRUE,trial.cn="Trial",...){
 	if(!"icac"%in%class(x))stop("object \"x\" is not of class \"icac\"\n")
 	if(missing(x))stop("please supply an \"icac\" object \"x\"\n")

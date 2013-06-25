@@ -1,5 +1,5 @@
-\name{plot.avgba}
-\alias{plot.avgba}
+\name{plot_avgba}
+\alias{plot_avgba}
 \concept{EEG}
 \concept{electro-encephalogram}
 \concept{electroencephalogram}
@@ -15,7 +15,7 @@
 \concept{event related magnetic fields}
 \title{Plot the average waveforms at each channel before and after correction.}
 \description{For each channel, the average for uncorrected (black line) and corrected (blue line) waveforms across all trials is computed and plotted.}
-\usage{\method{plot}{avgba}(x, data, channel = NULL, n.win = NULL, 
+\usage{plot_avgba(x, data, channel = NULL, n.win = NULL, 
 new.page = TRUE, time.cn = "Time", ...)}
 \arguments{
   \item{x}{An \code{icac} object as returned by the function of the same name.}
@@ -32,11 +32,11 @@ new.page = TRUE, time.cn = "Time", ...)}
 \code{\link{fastICA}};
 \code{\link{icac}};
 \code{\link{mwd.thrsh}};
-\code{\link{plot.trba}};
-\code{\link{plot.nic}};
-\code{\link{plot.tric}};
+\code{\link{plot_trba}};
+\code{\link{plot_nic}};
+\code{\link{plot_tric}};
 \code{\link{summary.icac}};
-\code{\link{topo.ic}};
+\code{\link{topo_ic}};
 \code{\link{update.icac}}.
 }
 \examples{

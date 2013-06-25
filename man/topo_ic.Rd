@@ -1,5 +1,5 @@
-\name{topo.ic}
-\alias{topo.ic}
+\name{topo_ic}
+\alias{topo_ic}
 \concept{EEG}
 \concept{electro-encephalogram}
 \concept{electroencephalogram}
@@ -15,7 +15,7 @@
 \concept{event related magnetic fields}
 \title{Plot the topographic map of an independent component.}
 \description{coming soon}
-\usage{\method{topo}{ic}(x, ic, coords = c("bosemi.32","egi.129", 
+\usage{topo_ic(x, ic, coords = c("bosemi.32","egi.129", 
 "neuromag.306.mag", "neuromag.306.plan1", "neuromag.306.plan2"), 
 col = "topo", xlab="left to right", ylab="back to front", 
 k = NULL, bs = "cr", too.far = NULL, ...)}
@@ -51,12 +51,11 @@ k = NULL, bs = "cr", too.far = NULL, ...)}
 \code{\link{fastICA}};
 \code{\link{icac}};
 \code{\link{mwd.thrsh}};
-\code{\link{plot.avgba}};
-\code{\link{plot.trba}};
-\code{\link{plot.nic}};
-\code{\link{plot.tric}};
+\code{\link{plot_avgba}};
+\code{\link{plot_trba}};
+\code{\link{plot_nic}};
+\code{\link{plot_tric}};
 \code{\link{summary.icac}};
-\code{\link{topo.ic}};
 \code{\link{update.icac}}.
 }
 \examples{
