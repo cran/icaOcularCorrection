@@ -19,7 +19,8 @@
 	the peaks of blinks and eye-movements, but could be used for any other type
 	of time series. See section \code{Details} for more info on how to use it.}
 \usage{get.peaks(data, channel, trials = NULL, 
-trial.cn = "Trial", time.cn = "Time")}
+trial.cn = "Trial", time.cn = "Time", 
+add.lines = NULL, ...)}
 \arguments{
   \item{data}{A data frame containing the data. Measurements for each
 	  channel/electrode should be arranged in columns with the
@@ -33,6 +34,11 @@ trial.cn = "Trial", time.cn = "Time")}
 	  Defaults to "Trial".}
   \item{time.cn}{The quoted column name containing the time information.
 	  Defaults to "Time".}
+  \item{add.lines}{A list of column names and colors pairs of the lines to be
+	  added to the plot. For example \code{add.lines = list(c("MISC002",
+	  "red"), c("MWD", "blue"))}. Defaults to \code{NULL}.}
+  \item{...}{Further arguments passed to \code{plot}, \code{lines}, and
+	  \code{locator}.}
 }
 \details{The function is build on function \code{locator}. As such,
 	\code{get.peaks} is only supported on screen devices such as \code{X11},

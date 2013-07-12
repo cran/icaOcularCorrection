@@ -21,8 +21,8 @@
 \tabular{ll}{
 Package: \tab icaOcularCorrection\cr
 Type: \tab Package\cr
-Version: \tab 2.2.4\cr
-Date: \tab 2013-06-25\cr
+Version: \tab 3.0.0\cr
+Date: \tab 2013-07-12\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }

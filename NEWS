@@ -1,4 +1,9 @@
 --------------------
+version 3.0.0
+-----
+* Added argument ``add.lines'' to function ``get.peaks''.
+
+--------------------
 version 2.2.4
 -----
 * Functions ``plot.avgba'', ``plot.nic'', ``plot.trba'',

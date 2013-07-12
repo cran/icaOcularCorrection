@@ -1,7 +1,7 @@
-78a4c196e7fcf09e80b76f53fd09ee20 *DESCRIPTION
+6dcb5504cd85e4f49239031bdf94d50f *DESCRIPTION
 fad8ff61d340e696424f16cf7bbfd6de *NAMESPACE
-359f4d5f58ef4e1d4e290dc2ff3ce158 *NEWS
-9ef5537bbea96cfab48663c9d2590660 *R/get.peaks.R
+253f1cad2452078ad7aee0bf98f8388e *NEWS
+38c48797a0d1802bf70c81752b001b2b *R/get.peaks.R
 4ce9f8e49e2346e4b314e72b390edfbd *R/icac.R
 8e9c2f85061f9efd9a68ed097d428a13 *R/mwd.thrsh.R
 ecc66bf02f43bbf527176af2d58c08a9 *R/plot_avgba.R
@@ -12,10 +12,10 @@ fe079d600f57ada40d249e69b325c411 *R/summary.icac.R
 84826a451f81be855323859472534d1c *R/topo_ic.R
 86d08ff3fdd9823aa80c8a442bd0e43c *R/update.icac.R
 8bc5a15e968d1b90284e1f33a5bd6f9e *inst/doc/vignette.R
-a9826d99cf0e3a707dce4d912c5b72c3 *inst/doc/vignette.Rnw
-6cec82be4947760fee81beba6e017ad5 *inst/doc/vignette.pdf
-61e9a47428158e2d60628879dcbd732e *man/get.peaks.Rd
-3e40d2e5a8ebee8715e9020baf073e8b *man/icaOcularCorrection-package.Rd
+2434c46d6615ffc21824cdfef1d16d85 *inst/doc/vignette.Rnw
+18533e44fd0a820a510792beb47fd89c *inst/doc/vignette.pdf
+99882270aa84fa4b921862a30300dd0b *man/get.peaks.Rd
+9b5d600476382a4bc39878bf33a15401 *man/icaOcularCorrection-package.Rd
 e14b990cae16f47f77357d608bd9eecc *man/icac.Rd
 baf1f291860616d1fa81509661eb44ec *man/mwd.thrsh.Rd
 ee47ac0447f44aa04b664e03e76fa688 *man/plot_avgba.Rd
@@ -34,7 +34,6 @@ f6737c20665da1f042e9bf8df4b434d0 *vignettes/IC6E126.pdf
 e00398c6daeb5e3be21c9247a078d794 *vignettes/ICNumTrials3.pdf
 dc894a880e2f6798b5efa02f90c10881 *vignettes/ICNumTrials5.pdf
 e293a6640c4fa364f91b83144ab6a82a *vignettes/beforeAfter5IC.pdf
-7eeb2c2dfe14758235752eea2af53a73 *vignettes/data.bib
 5b0f982fd9241d2686159d1294d3190a *vignettes/plotNICIC43E21.pdf
 51974fb449f70bc1e2fc0e15028ca3fd *vignettes/plotNICIC52E14.pdf
 71aeb3f924938e62d856180d4f286f54 *vignettes/plotNICIC6E126.pdf
@@ -49,4 +48,4 @@ efc8498749e9b955c30d08f2dc84cd99 *vignettes/uncorrectedCorrected0.pdf
 d2e1c22fdf8391329cfe2b49cd66cb3d *vignettes/uncorrectedCorrected12.pdf
 b927d24f4ca02c72a747da5b447b6c85 *vignettes/uncorrectedCorrected3.pdf
 8ade5553cc49246986bc96a0c5c6c029 *vignettes/uncorrectedCorrected5.pdf
-a9826d99cf0e3a707dce4d912c5b72c3 *vignettes/vignette.Rnw
+2434c46d6615ffc21824cdfef1d16d85 *vignettes/vignette.Rnw

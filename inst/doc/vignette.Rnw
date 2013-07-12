@@ -1,12 +1,10 @@
-\documentclass[12pt]{apa}
+\documentclass[doc]{apa6}
 
 \usepackage{Sweave}
 \usepackage{graphicx}
 \usepackage{rotating}
 \usepackage{verbatim}
 \usepackage{enumerate}
-\usepackage[margin=0.75in]{geometry}
-\usepackage{fancyhdr}
 
 % some commands for avoiding floats flushed to the end
     \renewcommand{\topfraction}{0.9}	% max fraction of floats at top
@@ -24,18 +22,11 @@
 {formatcom={\vspace{-0.5ex}},fontfamily=courier,fontseries=b,%
   fontsize=\scriptsize}
 
-\setlength{\headheight}{15.2pt}
-\pagestyle{fancyplain}
-\lhead[]{ICA correction with {\sc icaOcularCorrection}}
-\chead[]{}
-\rhead[]{Antoine Tremblay}
-\lfoot[]{}
-\cfoot[]{\thepage}
-\rfoot[]{}
- 
 
-\title{Denoising EEG and MEG Recordings using {\tt icaOcularCorrection}}
+\title{Denoising EEG and MEG Recordings using {\tt icaOcularCorrection}.}
 %\VignetteIndexEntry{Denoising EEG and MEG Recordings using icaOcularCorrection.}
+\shorttitle{Denoising EEG and MEG Recordings.}
+\leftheader{Tremblay, A.}
 \author{Antoine Tremblay}
 \affiliation{Dalhousie University, Halifax, Nova Scotia, Canada}
 \abstract{This vignette documents the steps in performing Independent
@@ -46,7 +37,6 @@ Please note that the vignette is still under construction. Therefore some
 sections will be empty and the structure of the vignette might change in later
 versions of the package.
 }
-\headinglevels{four}
 \setcounter{tocdepth}{5}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -58,19 +48,20 @@ versions of the package.
 
 {\section{Introduction}
 The correction method proposed in this package is largely based on the method
-described in \citeA{Flexer2005}. The process of correcting electro- and
-magneto-encephalographic data (EEG/MEG) begins by running function {\tt icac},
-which first performs independent components analysis (ICA) to decompose the
-data frame into independent components (ICs) using function {\tt fastICA} from
-the package of the same name \cite{Marchini2012}. It then calculates for each
-trial the correlation between each IC and each one of the noise signals --
-there can be one or more, e.g., vertical and horizontal electro-oculograms
-(VEOG and HEOG), electro-myograms (EMG), electro-cardiograms (ECG), galvanic
-skin responses (GSR), and other noise signals. Subsequently, portions of an IC
-corresponding to trials at which the correlation between it and a noise signal
-was at or above threshold \cite<set to 0.4 by default;>[p. 1001]{Flexer2005}
-are either zeroed-out in the source matrix, $S$, or subtracted from the data
-that was passed to function {\tt icac}. 
+described in Flexer, Bauer, Pripfl, \& Dorffner (2005). The process of
+correcting electro- and magneto-encephalographic data (EEG/MEG) begins by
+running function {\tt icac}, which first performs independent components
+analysis (ICA) to decompose the data frame into independent components (ICs)
+using function {\tt fastICA} from the package of the same name (Marchini,
+Heaton, \& Ripley, 2012). It then calculates for each trial the correlation
+between each IC and each one of the noise signals -- there can be one or more,
+e.g., vertical and horizontal electro-oculograms (VEOG and HEOG),
+electro-myograms (EMG), electro-cardiograms (ECG), galvanic skin responses
+(GSR), and other noise signals. Subsequently, portions of an IC corresponding
+to trials at which the correlation between it and a noise signal was at or
+above threshold (set to 0.4 by default; Flexer et al., 2005, p. 1001) are
+either zeroed-out in the source matrix, $S$, or subtracted from the data that
+was passed to function {\tt icac}. 
 
 The user can then identify which ICs correlate with the noise signals the most
 by looking at the summary of the {\tt icac} object (using function {\tt
@@ -1607,10 +1598,10 @@ dev.off()
   trials; black line), {\tt EEGLAB} corrected (red), {\tt icaOcularCorrection}
   uncorrected (129 channels and 472 trials; green line), and {\tt
   icaOcularCorrection} corrected (blue line) waveforms at channel E21. Top
-  right panel: Topographic map of uncorrected blinks; Bottom left panel:
-  Topographic map of {\tt EEGLAB} corrected blinks. Bottom righ panel:
+  right panel: Topographic map of uncorrected blinks. Bottom left panel:
   Topographic map of {\tt icaOcularCorrection} corrected blinks (some trials +
-  top 5 ICs completely zerod-out).}
+  top 5 ICs completely zerod-out). Bottom righ panel: Topographic map of {\tt
+  EEGLAB} corrected blinks.}
   \label{fig:eeglabVSicOc}
 \end{figure}
 }
@@ -1646,6 +1637,11 @@ Coming soon.
 Coming soon.
 
 \newpage
-\bibliography{data}
+
+\section{References}
+Flexer, A., Bauer, H., Pripfl, J., \& Dorffner, G. (2005). Using ICA for removal of ocular artifacts in EEG recorded from blind subjects. {\it Neural Networks}, {\it 18}, 998--1005.
+\ \\ \ \\
+\indent Marchini, J., Heaton, C., \& Ripley, B. (2012). {\it fastICA: FastICA Algorithms to perform ICA and Projection Pursuit} [Computer software manual]. Available from http://CRAN.R-project.org/package=fastICA (R package version 1.1-16).
+%\bibliography{data}
 \end{document}
 
